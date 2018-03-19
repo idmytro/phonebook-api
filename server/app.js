@@ -6,7 +6,7 @@ const path = require('path');
 
 // Set env
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
-require('dotenv').config({path: path.join(__dirname, `.env.${process.env.NODE_ENV}`)});
+require('dotenv').config({path: path.join(__dirname, '..', `.env.${process.env.NODE_ENV}`)});
 
 mongoose.connect(process.env.MONGO_URI);
 mongoose.set('debug', process.env.MONGO_DEBUG);

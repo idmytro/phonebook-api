@@ -35,7 +35,7 @@ UsersSchema.statics = {
                     done({message: "Email or password is not correct"});
                 }
             });
-    },
+    }, //.bind(model), TODO: bind real model
     serializeUser: function(user, cb) {
         cb(null, user);
     },
