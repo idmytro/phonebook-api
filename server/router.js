@@ -20,13 +20,16 @@ module.exports = (app) => {
 
     // add cookie-session
     app.use(session({
-        name: 'session',
+        name: 'sessionId',
         secret: process.env.SECRET,
         saveUninitialized: false,
         resave: false,
-
-        maxAge: 24 * 60 * 60 * 1000, // 24 hours
-        httpOnly: true,
+        unset: 'destroy',
+        cookie: {
+            maxAge: 24 * 60 * 60 * 1000, // 24 hours
+            httpOnly: true,
+            // secure: true
+        },
         store: new MongoStore({
             storage: 'mongodb',
             instance: mongoose, // optional;)
@@ -40,10 +43,13 @@ module.exports = (app) => {
             passReqToCallback: true,
             usernameField: "email"
         },
-        mongoose.model('UsersModel').checkUser
+        UsersModel.checkUser.bind(UsersModel)
     ));
-    passport.serializeUser(mongoose.model('UsersModel').serializeUser);
-    passport.deserializeUser(mongoose.model('UsersModel').deserializeUser);
+    passport.serializeUser(UsersModel.serializeUser.bind(UsersModel));
+    passport.deserializeUser(UsersModel.deserializeUser.bind(UsersModel));
+
+    app.use(passport.initialize());
+    app.use(passport.session());
 
     // connect API routes
     app.use('/api', require('./api/v1'));

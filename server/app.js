@@ -3,6 +3,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const helmet = require('helmet');
+const compression = require('compression');
 
 // Set env
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
@@ -20,6 +22,10 @@ mongoose.connection.on('error', (err) => {
 });
 
 const app = express();
+
+app.set('x-powered-by', false);
+app.use(helmet());
+app.use(compression({level: 6}));
 
 require('./router')(app);
 

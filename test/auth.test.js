@@ -7,6 +7,7 @@ const UsersModel = require(path.join(__dirname, '..', 'server', 'api', 'v1', 'us
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const should = chai.should();
+const expect = chai.expect;
 chai.use(chaiHttp);
 
 describe('Auth', () => {
@@ -24,12 +25,13 @@ describe('Auth', () => {
             .send({
                 email: process.env.TEST_EMAIL,
                 username: process.env.TEST_USER,
-                password: process.env.TEST_PASS,
-                vka: "Asdf"
+                password: process.env.TEST_PASS
             })
             .end((err, res) => {
                 res.should.have.status(200);
-                // TODO: continue
+                res.body.message.should.be.a('string');
+                res.body.message.should.be.eq('Register successful');
+                expect(res).to.have.cookie('sessionId');
                 done();
             });
     });
@@ -44,7 +46,8 @@ describe('Auth', () => {
             })
             .end((err, res) => {
                 res.should.have.status(400);
-                // TODO: continue
+                res.body.message.should.be.a('string');
+                res.body.message.should.be.eq('User already exists');
                 done();
             });
     });

@@ -35,14 +35,15 @@ UsersSchema.statics = {
                     done({message: "Email or password is not correct"});
                 }
             });
-    }, //.bind(model), TODO: bind real model
+    },
     serializeUser: function(user, cb) {
-        cb(null, user);
+        user.id = user.id ? user.id : user._id.toString();
+        cb(null, user.id);
     },
     deserializeUser: function(id, cb) {
         this
             .findById(id)
-            .select('username role')
+            .select('username role email image')
             .lean()
             .exec(function (err, user) {
                 if (err) { return cb(err); }
@@ -53,7 +54,7 @@ UsersSchema.statics = {
 
 UsersSchema.pre('save', function() {
     if(this.isNew || this.isModified("password")) {
-        this.password = bcrypt.hashSync(this.password, process.env.SALT_LENGTH);
+        this.password = bcrypt.hashSync(this.password, parseInt(process.env.SALT_LENGTH));
     }
 });
 

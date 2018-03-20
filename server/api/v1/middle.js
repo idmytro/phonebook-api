@@ -9,3 +9,8 @@ const validator = new Validator({
 exports.validate = (props, req, res, next) => {
     validator.validate(props)(req, res, next);
 };
+
+exports.isAuthenticated = (req, res, next) => {
+    if (req.isAuthenticated()) return next();
+    res.status(401).send({message: "Not authorized"});
+};

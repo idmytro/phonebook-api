@@ -8,7 +8,7 @@ const mdl = require('../middle');
 const passport = require('passport');
 const _ = require('lodash');
 
-router.get('/profile', ctrl.getProfile);
+router.get('/profile', mdl.isAuthenticated, ctrl.getProfile);
 
 router.post('/login', _.partial(mdl.validate, validations.login), passport.authenticate('local'), ctrl.loginUser);
 
