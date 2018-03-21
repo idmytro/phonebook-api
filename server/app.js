@@ -23,6 +23,7 @@ mongoose.connection.on('error', (err) => {
 
 const app = express();
 
+app.use('/', express.static(path.join(__dirname, '..', 'static')));
 app.set('x-powered-by', false);
 app.use(helmet());
 app.use(compression({level: 6}));

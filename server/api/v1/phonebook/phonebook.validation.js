@@ -35,4 +35,48 @@ module.exports = {
             }
         }
     },
+    addNew: {
+        body: {
+            type: 'object',
+            required: [],
+            properties: {
+                name: {
+                    type: 'string',
+                    maxLength: 255
+                },
+                surname: {
+                    type: 'string',
+                    maxLength: 255
+                },
+                position: {
+                    type: 'string',
+                    maxLength: 255
+                },
+                email: {
+                    type: 'array',
+                    uniqueItems: true,
+                    maxLength: 25,
+                    items: [
+                        {
+                            type: 'string',
+                            format: 'email',
+                            minLength: 4,
+                            maxLength: 70
+                        }
+                    ]
+                },
+                phone: {
+                    type: 'array',
+                    uniqueItems: true,
+                    maxLength: 25,
+                    items: [
+                        {
+                            type: 'string',
+                            maxLength: 70
+                        }
+                    ]
+                }
+            }
+        }
+    }
 };

@@ -6,7 +6,7 @@ const _ = require('lodash');
 
 exports.getContacts = (req, res) => {
     let query = {
-        addedBy: Types.ObjectId(req.user.id)
+        addedBy: req.user._id
     };
     if(req.query.search !== "") {
         const regEx = {$regex: _.escapeRegExp(req.query.search), $options: "i"};
@@ -27,5 +27,14 @@ exports.getContacts = (req, res) => {
         .lean()
         .exec( (err, contacts) => {
             res.send(contacts);
+        });
+};
+
+exports.AddNewContact = (req, res) => {
+    req.body.addedBy = req.user._id;
+    ContactsModel
+        .create(req.body, (err, result) => {
+            if(err) return res.status(400).send({message: err.message});
+            res.send({message: "Contact added successful", id: result.id});
         });
 };
