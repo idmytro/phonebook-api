@@ -57,7 +57,7 @@ module.exports = (app) => {
     // error handler
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
-        res.status(400).send(err.message || err);
+        res.status(400).send({message: err.message || err});
     });
 
 };

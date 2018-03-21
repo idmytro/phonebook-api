@@ -12,7 +12,7 @@ const ContactsSchema = new Schema({
     phone: [{type: String, lowercase: true, trim: true, index: 1}],
     picture: {type: String},
     addedAt: {type: Date, default: Date.now, select: false},
-    addedBy: {type: Schema.ObjectId, ref: "UsersModel", required: true, index: 1}
+    addedBy: {type: Schema.ObjectId, ref: "UsersModel", required: true, index: 1, select: false}
 }, {
     collection: "ContactsCollection"
 });

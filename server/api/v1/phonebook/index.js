@@ -11,8 +11,8 @@ router.get('/', _.partial(mdl.validate, validations.getList), ctrl.getContacts);
 
 router.post('/', _.partial(mdl.validate, validations.addNew), ctrl.AddNewContact);
 
-// router.get('/:id', _.partial(mdl.validate, validations.idParam), ctrl.GetContactById);
-//
+router.get('/:id', _.partial(mdl.validate, validations.idParam), ctrl.GetContactById);
+
 // router.put('/:id', _.partial(mdl.validate, validations.updateContact), ctrl.UpdateContactById);
 //
 // router.delete('/:id', _.partial(mdl.validate, validations.idParam), ctrl.DeleteContactById);

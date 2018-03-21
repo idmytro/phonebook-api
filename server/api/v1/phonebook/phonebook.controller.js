@@ -38,3 +38,14 @@ exports.AddNewContact = (req, res) => {
             res.send({message: "Contact added successful", id: result.id});
         });
 };
+
+exports.GetContactById = (req, res) => {
+    ContactsModel
+        .findOne({_id: Types.ObjectId(req.params.id), addedBy: req.user._id})
+        .lean()
+        .exec( (err, contact) => {
+            if(err) return res.status(500).send({message: err.message});
+            else if (!contact) return res.status(404).send({message: "Not found"});
+            res.send(contact);
+        });
+};
