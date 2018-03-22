@@ -49,3 +49,20 @@ exports.GetContactById = (req, res) => {
             res.send(contact);
         });
 };
+
+exports.UpdateContactById = (req, res) => {
+    ContactsModel
+        .findByIdAndUpdate(req.params.id, {$set: req.body}, {new: true}, (err, result) => {
+            if(err) return res.status(500).send({message: err.message});
+            else if (!result) return res.status(404).send({message: "Not found"});
+            res.send(result);
+        });
+};
+
+exports.DeleteContactById = (req, res) => {
+    ContactsModel
+        .findByIdAndRemove(req.params.id, err => {
+            if(err) return res.status(500).send({message: err.message});
+            res.send({message: "Contact deleted successful"});
+        });
+};

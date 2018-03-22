@@ -1,4 +1,62 @@
 
+const objectId = {
+    params: {
+        type: "object",
+            required: ["id"],
+        properties: {
+            id: {
+                type: "string",
+                    pattern: "^[0-9a-fA-F]{24}$"
+            }
+        }
+    }
+};
+
+const contactBody = {
+    body: {
+        type: "object",
+        required: [],
+        properties: {
+            name: {
+                type: "string",
+                maxLength: 255
+            },
+            surname: {
+                type: "string",
+                maxLength: 255
+            },
+            position: {
+                type: "string",
+                maxLength: 255
+            },
+            email: {
+                type: "array",
+                uniqueItems: true,
+                maxLength: 25,
+                items: [
+                    {
+                        type: "string",
+                        format: "email",
+                        minLength: 4,
+                        maxLength: 70
+                    }
+                ]
+            },
+            phone: {
+                type: "array",
+                uniqueItems: true,
+                maxLength: 25,
+                items: [
+                    {
+                        type: "string",
+                        maxLength: 70
+                    }
+                ]
+            }
+        }
+    }
+};
+
 module.exports = {
     getList: {
         query: {
@@ -35,60 +93,7 @@ module.exports = {
             }
         }
     },
-    addNew: {
-        body: {
-            type: "object",
-            required: [],
-            properties: {
-                name: {
-                    type: "string",
-                    maxLength: 255
-                },
-                surname: {
-                    type: "string",
-                    maxLength: 255
-                },
-                position: {
-                    type: "string",
-                    maxLength: 255
-                },
-                email: {
-                    type: "array",
-                    uniqueItems: true,
-                    maxLength: 25,
-                    items: [
-                        {
-                            type: "string",
-                            format: "email",
-                            minLength: 4,
-                            maxLength: 70
-                        }
-                    ]
-                },
-                phone: {
-                    type: "array",
-                    uniqueItems: true,
-                    maxLength: 25,
-                    items: [
-                        {
-                            type: "string",
-                            maxLength: 70
-                        }
-                    ]
-                }
-            }
-        }
-    },
-    idParam: {
-        params: {
-            type: "object",
-            required: ["id"],
-            properties: {
-                id: {
-                    type: "string",
-                    pattern: "^[0-9a-fA-F]{24}$"
-                }
-            }
-        }
-    }
+    addNew: contactBody,
+    idParam: objectId,
+    "updateContact": Object.assign({}, contactBody, objectId)
 };
