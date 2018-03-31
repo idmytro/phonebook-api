@@ -114,6 +114,35 @@
       "targetSchema": {
         "rel": "self"
       }
+    },
+    {
+      "title": "POST Add new contact",
+      "description": "Add new contact to phonebook",
+      "rel": "self",
+      "href": "/phonebook",
+      "method": "POST",
+      "authentication_needed": true,
+      "required": [],
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "$ref": "#/definitions/name"
+          },
+          "surname": {
+            "$ref": "#/definitions/surname"
+          },
+          "position": {
+            "$ref": "#/definitions/position"
+          },
+          "email": {
+            "$ref": "#/definitions/email"
+          },
+          "phone": {
+            "$ref": "#/definitions/phone"
+          }
+        }
+      }
     }
   ]
 }
