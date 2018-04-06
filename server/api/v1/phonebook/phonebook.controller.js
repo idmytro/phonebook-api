@@ -8,6 +8,7 @@ exports.getContacts = (req, res) => {
     let query = {
         addedBy: req.user._id
     };
+    if(req.query.category) query.category = Types.ObjectId(req.query.category);
     if(req.query.search !== "") {
         const regEx = {$regex: _.escapeRegExp(req.query.search), $options: "i"};
         query["$or"] = {
@@ -20,7 +21,7 @@ exports.getContacts = (req, res) => {
 
     ContactsModel
         .find(query)
-        .select('name surname')
+        .select('name surname picture')
         .sort({[req.query.sort]: req.query.sortValue})
         .skip(req.query.limit * (req.query.page - 1))
         .limit(req.query.limit)

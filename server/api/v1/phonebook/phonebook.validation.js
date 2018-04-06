@@ -42,16 +42,43 @@ const contactBody = {
                     }
                 ]
             },
-            phone: {
-                type: "array",
-                uniqueItems: true,
-                maxLength: 25,
-                items: [
-                    {
-                        type: "string",
-                        maxLength: 70
-                    }
-                ]
+            "phone": {
+                "type": "array",
+                "uniqueItems": true,
+                "maxLength": 25,
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "category": {
+                            "type": "string",
+                            "enum": [
+                                "mobile",
+                                "work",
+                                "home"
+                            ],
+                            "default": "mobile"
+                        },
+                        "value": {
+                            "type": "string",
+                            "maxLength": 70
+                        }
+                    },
+                    "required": ["category", "value"]
+                }
+            },
+            "bornDate": {
+                "type": "string",
+                "format": "date",
+                "formatMinimum": "1950-01-01"
+                // TODO: "formatMaximum":
+            },
+            "category": {
+                "type": "string",
+                "pattern": "^[0-9a-fA-F]{24}$"
+            },
+            "information": {
+                "type": "string",
+                "maxLength": 1024
             }
         }
     }
@@ -89,6 +116,10 @@ module.exports = {
                     minLength: 0,
                     maxLength: 100,
                     default: ""
+                },
+                "category": {
+                    "type": "string",
+                    "pattern": "^[0-9a-fA-F]{24}$"
                 }
             }
         }

@@ -1,0 +1,33 @@
+{
+  "id": "/users",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Users",
+  "description": "Users API",
+  "type": "object",
+  "definitions": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{24}$",
+      "example": "58a446fcc26aaf13460533bd"
+    }
+  },
+  "properties": {
+  },
+  "links": [
+    {
+      "title": "GET list of contacts",
+      "description": "Get list of contacts with pagination and search",
+      "href": "users",
+      "method": "GET",
+      "authentication_needed": true,
+      "required": [],
+      "schema": {
+        "type": "object",
+        "properties": {
+        }
+      },
+      "targetSchema": {
+      }
+    }
+  ]
+}

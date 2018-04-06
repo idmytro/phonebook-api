@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node server/app.js",
     "test": "mocha --timeout 10000",
-    "initDoca": "./node_modules/doca/lib/main.js init -i server/api/v1"
+    "initDoca": "./node_modules/doca/lib/main.js init -i server/api/v1",
+    "documentation": "cd documentation && node webpack/index | NODE_ENV=development node src/server"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
