@@ -20,7 +20,7 @@ exports.registerUser = (req, res) => {
             if(err.code === 11000) message = "User already exists";
             return res.status(400).send({message});
         }
-        req.login(_.pick(data, ['id', 'username', 'email']), err => {
+        req.login(_.pick(data, ['id', 'email']), err => {
             if(err) return res.status(500).send({message: err});
             res.send({message: "Register successful"});
         });

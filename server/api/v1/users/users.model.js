@@ -7,8 +7,9 @@ const _ = require("lodash");
 
 const UsersSchema = new Schema({
     email: {type: String, required: true, unique: true, lowercase: true, trim: true},
-    username: {type: String, required: true, unique: true, lowercase: true, trim: true},
-    password: {type: String},
+    name: {type: String, required: true, trim: true},
+    surname: {type: String, required: true, trim: true},
+    password: {type: String, required: true},
     addedAt: {type: Date, default: Date.now, select: false},
     role: {type: String, default: "user"},
     image: {type: String},

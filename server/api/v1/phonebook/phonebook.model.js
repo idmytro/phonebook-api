@@ -16,7 +16,7 @@ const ContactsSchema = new Schema({
     bornDate: {type: Date},
     category: {type: Schema.ObjectId, ref: "CategoryModel"},
     information: {type: String},
-    picture: {type: String},
+    image: {type: String},
     addedAt: {type: Date, default: Date.now, select: false},
     addedBy: {type: Schema.ObjectId, ref: "UsersModel", required: true, index: 1, select: false}
 }, {

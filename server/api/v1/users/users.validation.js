@@ -13,6 +13,12 @@ const defaultLoginPropsSchema = {
     }
 };
 
+const shortStr = {
+    type: 'string',
+    minLength: 2,
+    maxLength: 256
+};
+
 module.exports = {
     login: {
         body: {
@@ -24,13 +30,10 @@ module.exports = {
     register: {
         body: {
             type: 'object',
-            required: ['email', 'password', 'username'],
+            required: ['email', 'password', 'name', 'surname'],
             properties: Object.assign({
-                username: {
-                    type: 'string',
-                    minLength: 4,
-                    maxLength: 256
-                }
+                name: shortStr,
+                surname: shortStr
             }, defaultLoginPropsSchema)
         }
     }

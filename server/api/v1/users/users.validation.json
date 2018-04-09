@@ -9,24 +9,132 @@
       "type": "string",
       "pattern": "^[0-9a-fA-F]{24}$",
       "example": "58a446fcc26aaf13460533bd"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "minLength": 4,
+      "maxLength": 70,
+      "example": "y.chikhrai@shipnext.com",
+      "description": "User email"
+    },
+    "password": {
+      "type": "string",
+      "minLength": 4,
+      "maxLength": 256,
+      "example": "*******",
+      "description": "User password"
+    },
+    "shortStr": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 256
+    },
+    "role": {
+      "type": "string",
+      "enum": ["user"],
+      "default": "user",
+      "example": "user",
+      "description": "Role of account inside system"
     }
   },
   "properties": {
+    "email": {
+      "$ref": "#/definitions/email"
+    },
+    "name": {
+      "$ref": "#/definitions/shortStr",
+      "description": "User name",
+      "example": "Yurii"
+    },
+    "surname": {
+      "$ref": "#/definitions/shortStr",
+      "description": "User surname",
+      "example": "Chikhrai"
+    },
+    "password": {
+      "$ref": "#/definitions/password"
+    },
+    "addedAt": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2018-04-06T18:18:44.602Z",
+      "description": "Date when account was added to DB"
+    },
+    "role": {
+      "$ref": "#/definitions/role"
+    },
+    "image": {
+      "type": "string",
+      "example": "/images/58a446fcc26aaf13460533bd/awerasef.jpg",
+      "description": "Account avatar"
+    }
   },
   "links": [
     {
-      "title": "GET list of contacts",
-      "description": "Get list of contacts with pagination and search",
-      "href": "users",
-      "method": "GET",
+      "title": "POST Log in into system",
+      "description": "Log in into system. Response with header 'set-cookie'. Authorization work on cookie-sessions.",
+      "href": "users/login",
+      "method": "POST",
       "authentication_needed": true,
-      "required": [],
+      "required": ["email", "password"],
       "schema": {
         "type": "object",
         "properties": {
+          "email": {
+            "$ref": "#/definitions/email"
+          },
+          "password": {
+            "$ref": "#/definitions/password"
+          }
         }
       },
       "targetSchema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "default": "Log in successful"
+          }
+        }
+      }
+    },
+    {
+      "title": "POST Register into system",
+      "description": "Register into system. Response with header 'set-cookie'. Authorization work on cookie-sessions.",
+      "href": "users/register",
+      "method": "POST",
+      "authentication_needed": true,
+      "required": ["email", "password", "name", "surname"],
+      "schema": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "$ref": "#/definitions/email"
+          },
+          "password": {
+            "$ref": "#/definitions/password"
+          },
+          "name": {
+            "$ref": "#/definitions/shortStr",
+            "example": "Yurii",
+            "description": "User name"
+          },
+          "surname": {
+            "$ref": "#/definitions/shortStr",
+            "example": "Chikhrai",
+            "description": "User surname"
+          }
+        }
+      },
+      "targetSchema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "default": "Register successful"
+          }
+        }
       }
     }
   ]

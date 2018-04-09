@@ -21,7 +21,7 @@ exports.getContacts = (req, res) => {
 
     ContactsModel
         .find(query)
-        .select('name surname picture')
+        .select('name surname image')
         .sort({[req.query.sort]: req.query.sortValue})
         .skip(req.query.limit * (req.query.page - 1))
         .limit(req.query.limit)
