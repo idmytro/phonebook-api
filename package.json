@@ -6,7 +6,15 @@
     "start": "node server/app.js",
     "test": "mocha --timeout 10000",
     "initDoca": "./node_modules/doca/lib/main.js init -i server/api/v1",
-    "documentation": "cd documentation && node webpack/index | NODE_ENV=development node src/server"
+    "documentation": "cd documentation && node webpack/index | cross-env NODE_ENV=development node src/server",
+    "precommit": "lint-staged"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": false,
+    "semi": true,
+    "useTabs": true,
+    "tabWidth": 4
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -19,7 +27,7 @@
     "express-sessions": "^1.0.6",
     "helmet": "^3.12.0",
     "lodash": "^4.17.5",
-    "mongoose": "^5.0.11",
+    "mongoose": "^5.0.15",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0"
   },
@@ -27,7 +35,17 @@
     "chai": "^4.1.2",
     "chai-http": "^3.0.0",
     "cookie": "^0.3.1",
+    "cross-env": "^5.1.4",
     "doca": "^0.4.0",
-    "mocha": "^5.0.4"
+    "husky": "^0.14.3",
+    "lint-staged": "^7.0.4",
+    "mocha": "^5.1.0",
+    "prettier": "^1.12.0"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }

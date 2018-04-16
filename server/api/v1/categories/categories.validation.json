@@ -1,0 +1,111 @@
+{
+	"id": "/categories",
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "Categories",
+	"description": "Categories API",
+	"type": "object",
+	"definitions": {
+		"shortStr": {
+			"type": "string",
+			"maxLength": 256
+		},
+		"identifier": {
+			"type": "string",
+			"pattern": "^[0-9a-fA-F]{24}$",
+			"example": "58a446fcc26aaf13460533bd"
+		}
+	},
+	"properties": {
+		"_id": {
+			"$ref": "#/definitions/identifier",
+			"description": "Unique ObjectId of category"
+		},
+		"name": {
+			"$ref": "#/definitions/shortStr",
+			"example": "Work",
+			"description": "Category name"
+		},
+		"addedAt": {
+			"type": "string",
+			"format": "date-time",
+			"example": "2018-04-06T18:18:44.602Z",
+			"description": "Date when contact was added to DB"
+		},
+		"addedBy": {
+			"$ref": "#/definitions/identifier",
+			"description": "Unique user ObjectId what add category to DB"
+		}
+	},
+	"links": [
+		{
+			"title": "GET list of categories",
+			"description": "Get list of categories",
+			"href": "categories",
+			"method": "GET",
+			"authentication_needed": false,
+			"required": [],
+			"schema": {
+			},
+			"targetSchema": {
+				"type": "array",
+				"uniqueItems": true,
+				"maxLength": 25,
+				"items": {
+					"type": "object",
+					"properties": {
+						"_id": {
+							"$ref": "#/definitions/identifier",
+							"description": "Unique ObjectId of category"
+						},
+						"name": {
+							"$ref": "#/definitions/shortStr",
+							"example": "Work",
+							"description": "Category name"
+						}
+					}
+				}
+			}
+		},
+		{
+			"title": "POST Add new category",
+			"description": "Add new category to all users",
+			"href": "categories",
+			"method": "POST",
+			"authentication_needed": true,
+			"required": [],
+			"schema": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"$ref": "#/definitions/shortStr"
+					}
+				}
+			},
+			"targetSchema": {
+				"type": "object",
+				"properties": {
+					"message": {
+						"default": "Category created successful"
+					}
+				}
+			}
+		},
+		{
+			"title": "DELETE category by id",
+			"description": "Delete category for all users by id",
+			"href": "categories/{#/definitions/identifier}",
+			"method": "DELETE",
+			"authentication_needed": true,
+			"required": [],
+			"schema": {},
+			"targetSchema": {
+				"type": "object",
+				"properties": {
+					"message": {
+						"default": "Category removed successful"
+					}
+				}
+			}
+		}
+	]
+}

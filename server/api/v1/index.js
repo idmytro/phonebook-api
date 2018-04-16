@@ -1,11 +1,13 @@
 "use strict";
 
-const { Router } = require('express');
+const { Router } = require("express");
 const router = Router();
-const mdl = require('./middle');
+const mdl = require("./middle");
 
-router.use('/users', require('./users'));
+router.use("/categories", require("./categories"));
 
-router.use('/phonebook', mdl.isAuthenticated, require('./phonebook'));
+router.use("/phonebook", mdl.isAuthenticated, require("./phonebook"));
+
+router.use("/users", require("./users"));
 
 module.exports = router;
