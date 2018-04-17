@@ -6,6 +6,8 @@ const mdl = require("./middle");
 
 router.use("/categories", require("./categories"));
 
+router.use("/files", mdl.isAuthenticated, require("./files"));
+
 router.use("/phonebook", mdl.isAuthenticated, require("./phonebook"));
 
 router.use("/users", require("./users"));

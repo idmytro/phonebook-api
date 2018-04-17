@@ -2,6 +2,7 @@
 
 const _ = require("lodash");
 const path = require("path");
+const fs = require("fs");
 const server = require(path.join(__dirname, "..", "server", "app.js"));
 const UsersModel = require(path.join(
 	__dirname,
@@ -91,6 +92,21 @@ describe("Auth", () => {
 				res.body.message.should.be.eq("Log in successful");
 				// expect(res).to.have.cookie('sessionId');
 				res.should.have.cookie("sessionId");
+				done();
+			});
+	});
+});
+
+describe("Files", () => {
+	it("it should upload new file to service", done => {
+		agent
+			.post("/api/files")
+			.set("Content-Type", "multipart/form-data")
+			.attach("avatar", fs.readFileSync(path.join(__dirname, "test.jpg")))
+			.end((err, res) => {
+				res.should.have.status(200);
+				res.body.message.should.be.a("string");
+				res.body.message.should.be.eq("File upload successful");
 				done();
 			});
 	});
