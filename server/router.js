@@ -54,6 +54,14 @@ module.exports = app => {
 	app.use(passport.initialize());
 	app.use(passport.session());
 
+	// Add CORS
+	app.use(function(req, res, next) {
+		res.header("Access-Control-Allow-Origin", "*");
+		// res.header("Access-Control-Allow-Credentials", true);
+		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Accept-Encoding");
+		next();
+	});
+
 	// connect API routes
 	app.use("/api", require("./api/v1"));
 

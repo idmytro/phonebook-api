@@ -10,14 +10,16 @@
     "precommit": "lint-staged"
   },
   "prettier": {
-    "printWidth": 100,
+    "printWidth": 120,
     "singleQuote": false,
     "semi": true,
     "useTabs": true,
     "tabWidth": 4
   },
   "dependencies": {
+    "app-root-path": "^2.1.0",
     "bcryptjs": "^2.4.3",
+    "bluebird": "^3.5.1",
     "compression": "^1.7.2",
     "cookie-parser": "^1.4.3",
     "dotenv": "^5.0.1",

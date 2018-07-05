@@ -11,16 +11,7 @@ const multer = require("multer");
 const storage = multer.diskStorage({
 	// TODO: async folder check; random filename generation
 	destination: (req, file, cb) => {
-		const DestinationPath = path.join(
-			__dirname,
-			"..",
-			"..",
-			"..",
-			"..",
-			"static",
-			"img",
-			req.user._id.toString()
-		);
+		const DestinationPath = path.join(ROOT, "static", "img", req.user._id.toString());
 		if (!fs.existsSync(DestinationPath)) fs.mkdirSync(DestinationPath);
 		cb(null, DestinationPath);
 	},

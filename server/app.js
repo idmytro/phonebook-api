@@ -1,5 +1,8 @@
 "use strict";
 
+global.Promise = require("bluebird");
+global.ROOT = require("app-root-path").path;
+
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
