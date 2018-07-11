@@ -18,6 +18,11 @@ const shortStr = {
 	maxLength: 256
 };
 
+const imageStr = {
+	type: "string",
+	pattern: "^/img/[0-9a-fA-F]{24}/.{4,100}$"
+};
+
 module.exports = {
 	login: {
 		body: {
@@ -37,6 +42,17 @@ module.exports = {
 				},
 				defaultLoginPropsSchema
 			)
+		}
+	},
+	update: {
+		body: {
+			type: "object",
+			required: ["name", "surname", "image"],
+			properties: {
+				name: shortStr,
+				surname: shortStr,
+				image: imageStr
+			}
 		}
 	}
 };

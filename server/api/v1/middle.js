@@ -7,8 +7,8 @@ const validator = new Validator({
 	useDefaults: true
 });
 
-exports.validate = (props, req, res, next) => {
-	validator.validate(props)(req, res, next);
+exports.validate = props => {
+	return validator.validate(props);
 };
 
 exports.isAuthenticated = (req, res, next) => {

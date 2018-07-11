@@ -51,6 +51,7 @@ UsersSchema.statics = {
 				if (err) {
 					return cb(err);
 				}
+				user.id = user._id.toString();
 				cb(null, user);
 			});
 	}

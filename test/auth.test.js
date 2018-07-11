@@ -4,24 +4,8 @@ const _ = require("lodash");
 const path = require("path");
 const fs = require("fs");
 const server = require(path.join(__dirname, "..", "server", "app.js"));
-const UsersModel = require(path.join(
-	__dirname,
-	"..",
-	"server",
-	"api",
-	"v1",
-	"users",
-	"users.model.js"
-));
-const PhoneBookModel = require(path.join(
-	__dirname,
-	"..",
-	"server",
-	"api",
-	"v1",
-	"phonebook",
-	"phonebook.model.js"
-));
+const UsersModel = require(path.join(__dirname, "..", "server", "api", "v1", "users", "users.model.js"));
+const PhoneBookModel = require(path.join(__dirname, "..", "server", "api", "v1", "phonebook", "phonebook.model.js"));
 
 // const { parse } = require('cookie');
 const chai = require("chai");

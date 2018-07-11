@@ -104,6 +104,11 @@
 			"formatMinimum": "1950-01-01",
 			"example": "1992-10-19",
 			"description": "Contact birth date"
+		},
+		"image": {
+			"type": "string",
+			"pattern": "^/img/[0-9a-fA-F]{24}/.{4,100}$",
+			"description": "Image path"
 		}
 	},
 	"properties": {
@@ -146,7 +151,7 @@
 		},
 		"image": {
 			"type": "string",
-			"example": "/images/58a446fcc26aaf13460533bd/awerasef.jpg",
+			"example": "/img/58a446fcc26aaf13460533bd/awerasef.jpg",
 			"description": "Contact avatar"
 		},
 		"addedAt": {
@@ -214,7 +219,7 @@
 						},
 						"image": {
 							"type": "string",
-							"example": "/images/58a446fcc26aaf13460533bd/awerasef.jpg",
+							"example": "/img/58a446fcc26aaf13460533bd/awerasef.jpg",
 							"description": "Contact avatar"
 						}
 					}
@@ -254,6 +259,9 @@
 					},
 					"information": {
 						"$ref": "#/definitions/longStr"
+					},
+					"image": {
+						"$ref": "#/definitions/image"
 					}
 				}
 			},
@@ -317,6 +325,9 @@
 					},
 					"information": {
 						"$ref": "#/definitions/longStr"
+					},
+					"image": {
+						"$ref": "#/definitions/image"
 					}
 				}
 			},

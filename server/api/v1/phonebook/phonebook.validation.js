@@ -74,6 +74,10 @@ const contactBody = {
 			information: {
 				type: "string",
 				maxLength: 1024
+			},
+			image: {
+				type: "string",
+				pattern: "^/img/[0-9a-fA-F]{24}/.{4,100}$"
 			}
 		}
 	}
